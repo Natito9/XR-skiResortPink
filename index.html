@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pink Dream Ski Resort</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+   
+
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene physics="driver: ammo; debug: true">
+      <a-assets>
+        <a-asset-item
+          id="snowyTree"
+          src="assets/snowytree/tree1.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="snowyTreelight"
+          src="assets/snowytree/tree2.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="snowyTreeMedium"
+          src="assets/snowytree/tree3.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="skisHero"
+          src="assets/skis/skisHero.glb"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="plazaFloor"
+          src="assets/plazaFloor/plazaFloor.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="mountain"
+          src="assets/mountain/mountain0.glb"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="infopanelModel"
+          src="assets/info/info.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="chairlift"
+          src="assets/chairlift/chairlift.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="donutShop"
+          src="assets/donutShop/donutShop.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="skisOnFeet"
+          src="assets/skisOnFeet/skiOnFeet2.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="skiSlope"
+          src="assets/skiSlope/skislope.glb"
+        ></a-asset-item>
+
+        <img
+          id="backgroundPhoto"
+          src="assets/background.jpeg"
+          alt="Background Photo"
+        />
+        <img id="posterImage1" src="assets/posters/poster1.png" />
+         <img id="posterImage2" src="assets/posters/poster2.png" />
+          <img id="posterImage3" src="assets/posters/poster3.png" />
+      </a-assets>
+<a-entity id="rig"
+          movement-controls="constrainToNavMesh: false"
+          dynamic-body
+           fly-controls
+          position="0.3 1.7 1.7">
+
+<a-entity
+    id="camera"
+    camera
+      wasd-controls="acceleration: 40"
+    look-controls
+    position="0 0 0">
+           <a-cursor
+      fuse="true"
+      fuseTimeout="800"
+      rayOrigin="mouse"
+      geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015"
+      material="color: white; shader: flat">
+    </a-cursor>
+          <a-entity
+            id="skisOnFeetEntity"
+            gltf-model="#skisOnFeet"
+            position="0.3 -1 -0.7"
+            scale="0.3 0.3 0.3"
+            rotation="0 180 0"
+            visible="false"
+          ></a-entity>
+            <a-entity 
+      position="-1.1 -0.6 -1"
+      text="value: Controls:\nWASD - Move\nQ/E - Up/Down\nVR: Use thumbstick to move; 
+            align: left; 
+            width: 0.8; 
+            color: #8B4513;">
+    </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        light="type: ambient; color: #FFB6C1; intensity: 0.7;"
+      ></a-entity>
+      <a-entity
+        light="type: directional; color: #FCE4EC; intensity: 1; castShadow: true"
+        position="-10 15 -5"
+        rotation="-45 45 0"
+        shadow="cast: true"
+      ></a-entity>
+
+<!-- VR Hand Controllers -->
+
+<a-entity laser-controls="hand: left" raycaster="objects: .clickable" cursor="rayOrigin: entity"></a-entity>
+<a-entity laser-controls="hand: right" raycaster="objects: .clickable" cursor="rayOrigin: entity"></a-entity>
+
+
+      <a-sky
+        src="#backgroundPhoto"
+        rotation="0 0 0"
+        radius="10000"
+        shadow="receive: true"
+        static-body="shape: sphere"
+      ></a-sky>
+
+
+      <!-- plaza ground bottom-->
+      <a-box
+        id="plaza-ground"
+        position="0 0 -3"
+        width="150"
+        height="0.2"
+        depth="150"
+        color="#FCE4EC"
+        shadow="receive: true"
+       static-body="shape: box"
+        visible="true"
+      ></a-box>
+      <a-entity
+        fog="type: exponential; color: #E6E6FA; density: 0.005"
+      ></a-entity>
+      <!-- skis -->
+      <a-entity
+        id="equipSkisButton"
+        gltf-model="#skisHero"
+        position="0 0.5 0"
+        scale="1 1 1"
+        rotation="0 0 0"
+        shadow="cast: true; receive: true"
+        class="clickable"
+        equip-skis
+        visible="true"
+        animation="property: rotation; to: 0 360 0; dur: 10000; loop: true; easing: linear"
+      ></a-entity>
+      <a-entity position="0 0.2 0">
+  <a-ring
+    radius-inner="0.2"
+    radius-outer="0.5"
+    color="#ff69b4"
+    position="0 0.01 0"
+    rotation="-90 0 0"
+    material="shader: flat; opacity: 0.6"
+    animation="property: material.opacity; from: 0.3; to: 0.9; dur: 1000; dir: alternate; loop: true"
+  ></a-ring>
+</a-entity>
+
+      <!-- plaza round floor -->
+      <a-entity
+        gltf-model="#plazaFloor"
+        position="0 0.11 -1"
+        scale="0.3 0.3 0.3"
+        shadow="cast: false; receive: true"
+        rotation="1.6 0 0"
+      ></a-entity>
+      <!-- trees  -->
+      <a-entity
+        gltf-model="#snowyTree"
+        position="14 0 -4"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="16 0 -2"
+        scale="1.5 1.5 1.5"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="19 0 0"
+        scale="1.3 1.3 1.3"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <!-- trees middle (3) -->
+      <a-entity
+        gltf-model="#snowyTree"
+        position="4 0 -14"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="6 0 -15"
+        scale="1.5 1.5 1.5"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="10 0 -13"
+        scale="1.3 1.3 1.3"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <!-- trees close to chairlift -->
+      <a-entity
+        gltf-model="#snowyTreelight"
+        position="-10 0 6"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTreeMedium"
+        position="35 0 -4"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="25 0 -4"
+        scale="0.6 0.6 0.6"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <!-- trees behind 1 -->
+              <a-entity
+        gltf-model="#snowyTreelight"
+         position="-9 0 14"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+             <a-entity
+        gltf-model="#snowyTree"
+        position="-4 0 10"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="-3 0 14"
+        scale="1.5 1.5 1.5"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <a-entity
+        gltf-model="#snowyTree"
+        position="2 0 12"
+        scale="1.3 1.3 1.3"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+         <a-entity
+        gltf-model="#snowyTreelight"
+         position="5 0 12"
+        scale="1 1 1"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+         <a-entity
+        gltf-model="#snowyTreeMedium"
+           position="8 0 11"
+        scale="1.2 1.2 1.2"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+           <a-entity
+        gltf-model="#snowyTreeMedium"
+           position="12 0 13"
+        scale="1.4 1.4 1.4"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+     
+      <!-- mountains -->
+      <a-entity
+        id="mountain3"
+        gltf-model="#mountain"
+        position="50 -3 -40"
+        scale="0.7 0.7 0.7"
+        rotation="0 90 0"
+        shadow="cast: true; receive: true"
+        static-body="shape: mesh"
+      ></a-entity>
+      <a-entity
+        id="mountain2"
+        gltf-model="#mountain"
+        position="10 -5 -80"
+        scale="1 1 1"
+        rotation="0 30 0"
+        shadow="cast: true; receive: true"
+        static-body="shape: mesh"
+      ></a-entity>
+      <!-- <a-entity
+        id="mountain1"
+        gltf-model="#mountain"
+        position="-30 -2a -60"
+        scale="0.5 0.5 0.5"
+        rotation="0 180 0"
+        shadow="cast: true; receive: true"
+        static-body="shape: mesh"
+      ></a-entity> -->
+      <!-- skiSlope -->
+      <a-entity
+        gltf-model="#skiSlope"
+        position="-25 -1 -50"
+        scale="0.5 0.5 0.5"
+        rotation="0 180 0"
+        shadow="cast: true; receive: true"
+        static-body="shape: mesh"
+      ></a-entity>
+      <!-- infopanel -->
+      <a-entity
+        id="infopanel"
+        gltf-model="#infopanelModel"
+        position="4 0.3 -7"
+        scale="0.6 0.6 0.6"
+        rotation="0 140 0"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      
+      <a-plane
+  src="#posterImage1"
+  position="8.8 1.2 -3.8"
+  rotation="0 -40 0"
+  width="0.7"
+  height="1.2"
+  material="shader: flat"
+></a-plane>
+      <a-plane
+  src="#posterImage2"
+  position="7.4 1.1 -4.9"
+  rotation="0 -40 0"
+  width="1.8"
+  height="1.2"
+  material="shader: flat"
+></a-plane>
+      <a-plane
+  src="#posterImage3"
+  position="7.4 2.5 -4.9"
+  rotation="0 -40 0"
+  width="1.8"
+  height="1.2"
+  material="shader: flat"
+></a-plane>
+      <!-- chairlift -->
+      <a-entity
+        gltf-model="#chairlift"
+        position="40 4 -15"
+        scale="0.8 0.8 0.8"
+        rotation="8 -20 2"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+      <!-- donut shop -->
+      <a-entity
+        gltf-model="#donutShop"
+        position="-9 0 -8"
+        scale="0.8 0.8 0.8"
+        rotation="0 -50 0"
+        shadow="cast: true; receive: true"
+      ></a-entity>
+
+      <a-entity position="0 0 -3">
+        <a-entity
+          id="removeSkisButton"
+          geometry="primitive: plane; height: 0.4; width: 1"
+          material="color: #FF69B4"
+          text="value: Click to remove Skis; align: center; color: white"
+          position="0 1.6 -3"
+          class="clickable"
+          remove-skis
+        >
+         </a-entity>
+          <!-- Sign stick -->
+          <a-cylinder
+          id="removeSkisButtonStick"
+            position="0 1 -3.1"
+            height="1.3"
+            radius="0.05"
+            color="#FF69B4"
+             class="clickable"
+          remove-skis
+          >
+          </a-cylinder>
+      </a-entity>
+    </a-scene>
+    <script>
+      AFRAME.registerComponent("fly-controls", {
+        schema: {
+          speed: { type: "number", default: 0.1 },
+        },
+        init: function () {
+          this.keys = {};
+          window.addEventListener("keydown", (e) => (this.keys[e.code] = true));
+          window.addEventListener("keyup", (e) => (this.keys[e.code] = false));
+        },
+        tick: function () {
+          const el = this.el;
+          const pos = el.getAttribute("position");
+          if (this.keys["KeyQ"]) pos.y += this.data.speed;
+          if (this.keys["KeyE"]) pos.y -= this.data.speed;
+          el.setAttribute("position", pos);
+        },
+      });
+
+      AFRAME.registerComponent("equip-skis", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            const equippedSkis = document.querySelector("#skisOnFeetEntity");
+            const groundSkis = document.querySelector("#skisHero");
+            const removeButton = document.querySelector("#removeSkisButton");
+
+            if (!equippedSkis || !groundSkis || !removeButton) {
+              console.warn("Entities not found");
+              return;
+            }
+
+            equippedSkis.setAttribute("visible", "true");
+            groundSkis.setAttribute("visible", "false");
+            this.el.setAttribute("visible", "false");
+            removeButton.setAttribute("visible", "true");
+
+            console.log("Skis picked up and equipped!");
+          });
+        },
+      });
+
+      AFRAME.registerComponent("remove-skis", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            const equippedSkis = document.querySelector("#skisOnFeetEntity");
+            const groundSkis = document.querySelector("#skisHero");
+            const equipButton = document.querySelector("#equipSkisButton");
+
+            if (!equippedSkis || !groundSkis || !equipButton) {
+              console.warn("Entities not found");
+              return;
+            }
+
+            equippedSkis.setAttribute("visible", "false");
+            groundSkis.setAttribute("visible", "true");
+            this.el.setAttribute("visible", "false");
+            equipButton.setAttribute("visible", "true");
+
+            console.log("Skis removed and returned to ground.");
+          });
+        },
+      });
+
+
+  AFRAME.registerComponent("dynamic-cursor", {
+    init: async function () {
+      const scene = this.el;
+
+      // Desktop mouse cursor setup
+      if (!AFRAME.utils.device.isMobile() && !navigator.xr) {
+        const cameraEl = document.querySelector("[camera]");
+        const cursor = document.createElement("a-cursor");
+        cursor.setAttribute("fuse", "true");
+        cursor.setAttribute("fuseTimeout", "800");
+        cursor.setAttribute("rayOrigin", "mouse");
+        cursor.setAttribute("geometry", "primitive: ring; radiusInner: 0.01; radiusOuter: 0.015");
+        cursor.setAttribute("material", "color: white; shader: flat");
+        cameraEl.appendChild(cursor);
+        console.log("Mouse cursor added");
+      }
+    }
+  });
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const sceneEl = document.querySelector("a-scene");
+
+    // Enter VR: Hide the desktop cursor
+    sceneEl.addEventListener("enter-vr", () => {
+      const cursor = document.querySelector("a-cursor");
+      if (cursor) {
+        cursor.setAttribute("visible", false);
+        console.log("VR mode entered - cursor hidden");
+      }
+    });
+
+    // Exit VR: Show cursor back (optional)
+    sceneEl.addEventListener("exit-vr", () => {
+      const cursor = document.querySelector("a-cursor");
+      if (cursor) {
+        cursor.setAttribute("visible", true);
+        console.log("Exited VR mode - cursor visible again");
+      }
+    });
+  });
+
+
+
+    </script>
+
+
+
+  </body>
+</html>

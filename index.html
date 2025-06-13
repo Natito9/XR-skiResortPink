@@ -3,10 +3,6 @@
   <head>
     <title>Pink Dream Ski Resort</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-   
-
 
     <style>
       body {
@@ -71,28 +67,31 @@
           alt="Background Photo"
         />
         <img id="posterImage1" src="assets/posters/poster1.png" />
-         <img id="posterImage2" src="assets/posters/poster2.png" />
-          <img id="posterImage3" src="assets/posters/poster3.png" />
+        <img id="posterImage2" src="assets/posters/poster2.png" />
+        <img id="posterImage3" src="assets/posters/poster3.png" />
       </a-assets>
-<a-entity id="rig"
-          movement-controls="constrainToNavMesh: false"
-          dynamic-body
-           fly-controls
-          position="0.3 1.7 1.7">
-
-<a-entity
-    id="camera"
-    camera
-      wasd-controls="acceleration: 40"
-    look-controls
-    position="0 0 0">
-           <a-cursor
-      fuse="true"
-      fuseTimeout="800"
-      rayOrigin="mouse"
-      geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015"
-      material="color: white; shader: flat">
-    </a-cursor>
+      <a-entity
+        id="rig"
+        movement-controls="constrainToNavMesh: false"
+        dynamic-body
+        fly-controls
+        position="0.3 1.7 1.7"
+      >
+        <a-entity
+          id="camera"
+          camera
+          wasd-controls="acceleration: 40"
+          look-controls
+          position="0 0 0"
+        >
+          <a-cursor
+            fuse="true"
+            fuseTimeout="800"
+            rayOrigin="mouse"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015"
+            material="color: white; shader: flat"
+          >
+          </a-cursor>
           <a-entity
             id="skisOnFeetEntity"
             gltf-model="#skisOnFeet"
@@ -101,13 +100,14 @@
             rotation="0 180 0"
             visible="false"
           ></a-entity>
-            <a-entity 
-      position="-1.1 -0.6 -1"
-      text="value: Controls:\nWASD - Move\nQ/E - Up/Down\nVR: Use thumbstick to move; 
+          <a-entity
+            position="-1.1 -0.6 -1"
+            text="value: Controls:\nWASD - Move\nQ/E - Up/Down\nVR: Use thumbstick to move; 
             align: left; 
             width: 0.8; 
-            color: #8B4513;">
-    </a-entity>
+            color: #8B4513;"
+          >
+          </a-entity>
         </a-entity>
       </a-entity>
 
@@ -121,11 +121,18 @@
         shadow="cast: true"
       ></a-entity>
 
-<!-- VR Hand Controllers -->
+      <!-- VR Hand Controllers -->
 
-<a-entity laser-controls="hand: left" raycaster="objects: .clickable" cursor="rayOrigin: entity"></a-entity>
-<a-entity laser-controls="hand: right" raycaster="objects: .clickable" cursor="rayOrigin: entity"></a-entity>
-
+      <a-entity
+        laser-controls="hand: left"
+        raycaster="objects: .clickable"
+        cursor="rayOrigin: entity"
+      ></a-entity>
+      <a-entity
+        laser-controls="hand: right"
+        raycaster="objects: .clickable"
+        cursor="rayOrigin: entity"
+      ></a-entity>
 
       <a-sky
         src="#backgroundPhoto"
@@ -134,7 +141,6 @@
         shadow="receive: true"
         static-body="shape: sphere"
       ></a-sky>
-
 
       <!-- plaza ground bottom-->
       <a-box
@@ -145,7 +151,7 @@
         depth="150"
         color="#FCE4EC"
         shadow="receive: true"
-       static-body="shape: box"
+        static-body="shape: box"
         visible="true"
       ></a-box>
       <a-entity
@@ -165,16 +171,16 @@
         animation="property: rotation; to: 0 360 0; dur: 10000; loop: true; easing: linear"
       ></a-entity>
       <a-entity position="0 0.2 0">
-  <a-ring
-    radius-inner="0.2"
-    radius-outer="0.5"
-    color="#ff69b4"
-    position="0 0.01 0"
-    rotation="-90 0 0"
-    material="shader: flat; opacity: 0.6"
-    animation="property: material.opacity; from: 0.3; to: 0.9; dur: 1000; dir: alternate; loop: true"
-  ></a-ring>
-</a-entity>
+        <a-ring
+          radius-inner="0.2"
+          radius-outer="0.5"
+          color="#ff69b4"
+          position="0 0.01 0"
+          rotation="-90 0 0"
+          material="shader: flat; opacity: 0.6"
+          animation="property: material.opacity; from: 0.3; to: 0.9; dur: 1000; dir: alternate; loop: true"
+        ></a-ring>
+      </a-entity>
 
       <!-- plaza round floor -->
       <a-entity
@@ -242,13 +248,13 @@
         shadow="cast: true; receive: true"
       ></a-entity>
       <!-- trees behind 1 -->
-              <a-entity
+      <a-entity
         gltf-model="#snowyTreelight"
-         position="-9 0 14"
+        position="-9 0 14"
         scale="1 1 1"
         shadow="cast: true; receive: true"
       ></a-entity>
-             <a-entity
+      <a-entity
         gltf-model="#snowyTree"
         position="-4 0 10"
         scale="1 1 1"
@@ -266,25 +272,25 @@
         scale="1.3 1.3 1.3"
         shadow="cast: true; receive: true"
       ></a-entity>
-         <a-entity
+      <a-entity
         gltf-model="#snowyTreelight"
-         position="5 0 12"
+        position="5 0 12"
         scale="1 1 1"
         shadow="cast: true; receive: true"
       ></a-entity>
-         <a-entity
+      <a-entity
         gltf-model="#snowyTreeMedium"
-           position="8 0 11"
+        position="8 0 11"
         scale="1.2 1.2 1.2"
         shadow="cast: true; receive: true"
       ></a-entity>
-           <a-entity
+      <a-entity
         gltf-model="#snowyTreeMedium"
-           position="12 0 13"
+        position="12 0 13"
         scale="1.4 1.4 1.4"
         shadow="cast: true; receive: true"
       ></a-entity>
-     
+
       <!-- mountains -->
       <a-entity
         id="mountain3"
@@ -304,15 +310,6 @@
         shadow="cast: true; receive: true"
         static-body="shape: mesh"
       ></a-entity>
-      <!-- <a-entity
-        id="mountain1"
-        gltf-model="#mountain"
-        position="-30 -2a -60"
-        scale="0.5 0.5 0.5"
-        rotation="0 180 0"
-        shadow="cast: true; receive: true"
-        static-body="shape: mesh"
-      ></a-entity> -->
       <!-- skiSlope -->
       <a-entity
         gltf-model="#skiSlope"
@@ -331,31 +328,31 @@
         rotation="0 140 0"
         shadow="cast: true; receive: true"
       ></a-entity>
-      
+
       <a-plane
-  src="#posterImage1"
-  position="8.8 1.2 -3.8"
-  rotation="0 -40 0"
-  width="0.7"
-  height="1.2"
-  material="shader: flat"
-></a-plane>
+        src="#posterImage1"
+        position="8.8 1.2 -3.8"
+        rotation="0 -40 0"
+        width="0.7"
+        height="1.2"
+        material="shader: flat"
+      ></a-plane>
       <a-plane
-  src="#posterImage2"
-  position="7.4 1.1 -4.9"
-  rotation="0 -40 0"
-  width="1.8"
-  height="1.2"
-  material="shader: flat"
-></a-plane>
+        src="#posterImage2"
+        position="7.4 1.1 -4.9"
+        rotation="0 -40 0"
+        width="1.8"
+        height="1.2"
+        material="shader: flat"
+      ></a-plane>
       <a-plane
-  src="#posterImage3"
-  position="7.4 2.5 -4.9"
-  rotation="0 -40 0"
-  width="1.8"
-  height="1.2"
-  material="shader: flat"
-></a-plane>
+        src="#posterImage3"
+        position="7.4 2.5 -4.9"
+        rotation="0 -40 0"
+        width="1.8"
+        height="1.2"
+        material="shader: flat"
+      ></a-plane>
       <!-- chairlift -->
       <a-entity
         gltf-model="#chairlift"
@@ -383,18 +380,18 @@
           class="clickable"
           remove-skis
         >
-         </a-entity>
-          <!-- Sign stick -->
-          <a-cylinder
+        </a-entity>
+        <!-- Sign stick -->
+        <a-cylinder
           id="removeSkisButtonStick"
-            position="0 1 -3.1"
-            height="1.3"
-            radius="0.05"
-            color="#FF69B4"
-             class="clickable"
+          position="0 1 -3.1"
+          height="1.3"
+          radius="0.05"
+          color="#FF69B4"
+          class="clickable"
           remove-skis
-          >
-          </a-cylinder>
+        >
+        </a-cylinder>
       </a-entity>
     </a-scene>
     <script>
@@ -460,54 +457,46 @@
         },
       });
 
+      AFRAME.registerComponent("dynamic-cursor", {
+        init: async function () {
+          const scene = this.el;
 
-  AFRAME.registerComponent("dynamic-cursor", {
-    init: async function () {
-      const scene = this.el;
+          if (!AFRAME.utils.device.isMobile() && !navigator.xr) {
+            const cameraEl = document.querySelector("[camera]");
+            const cursor = document.createElement("a-cursor");
+            cursor.setAttribute("fuse", "true");
+            cursor.setAttribute("fuseTimeout", "800");
+            cursor.setAttribute("rayOrigin", "mouse");
+            cursor.setAttribute(
+              "geometry",
+              "primitive: ring; radiusInner: 0.01; radiusOuter: 0.015"
+            );
+            cursor.setAttribute("material", "color: white; shader: flat");
+            cameraEl.appendChild(cursor);
+            console.log("Mouse cursor added");
+          }
+        },
+      });
 
-      // Desktop mouse cursor setup
-      if (!AFRAME.utils.device.isMobile() && !navigator.xr) {
-        const cameraEl = document.querySelector("[camera]");
-        const cursor = document.createElement("a-cursor");
-        cursor.setAttribute("fuse", "true");
-        cursor.setAttribute("fuseTimeout", "800");
-        cursor.setAttribute("rayOrigin", "mouse");
-        cursor.setAttribute("geometry", "primitive: ring; radiusInner: 0.01; radiusOuter: 0.015");
-        cursor.setAttribute("material", "color: white; shader: flat");
-        cameraEl.appendChild(cursor);
-        console.log("Mouse cursor added");
-      }
-    }
-  });
+      document.addEventListener("DOMContentLoaded", () => {
+        const sceneEl = document.querySelector("a-scene");
 
+        sceneEl.addEventListener("enter-vr", () => {
+          const cursor = document.querySelector("a-cursor");
+          if (cursor) {
+            cursor.setAttribute("visible", false);
+            console.log("VR mode entered - cursor hidden");
+          }
+        });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const sceneEl = document.querySelector("a-scene");
-
-    // Enter VR: Hide the desktop cursor
-    sceneEl.addEventListener("enter-vr", () => {
-      const cursor = document.querySelector("a-cursor");
-      if (cursor) {
-        cursor.setAttribute("visible", false);
-        console.log("VR mode entered - cursor hidden");
-      }
-    });
-
-    // Exit VR: Show cursor back (optional)
-    sceneEl.addEventListener("exit-vr", () => {
-      const cursor = document.querySelector("a-cursor");
-      if (cursor) {
-        cursor.setAttribute("visible", true);
-        console.log("Exited VR mode - cursor visible again");
-      }
-    });
-  });
-
-
-
+        sceneEl.addEventListener("exit-vr", () => {
+          const cursor = document.querySelector("a-cursor");
+          if (cursor) {
+            cursor.setAttribute("visible", true);
+            console.log("Exited VR mode - cursor visible again");
+          }
+        });
+      });
     </script>
-
-
-
   </body>
 </html>
